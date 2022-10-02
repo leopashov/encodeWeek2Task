@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
-import { abi } from "../artifacts/contracts/ballot.sol/Ballot.json";
+import abi from '../ABI.json';
+//import { abi } from "../artifacts/contracts/ballot.sol/Ballot.json";
 
 dotenv.config();
 
@@ -34,10 +35,10 @@ async function main() {
 
 
     // Casting vote
-    console.log('Cast vote');
-    const castVoteTx = await contractInstance.vote(2); // takes proposal index
-    const castVoteTxReceipe = await castVoteTx.wait();
-    console.log({ castVoteTxReceipe });
+    // console.log('Cast vote');
+    // const castVoteTx = await contractInstance.vote(2); // takes proposal index
+    // const castVoteTxReceipe = await castVoteTx.wait();
+    // console.log({ castVoteTxReceipe });
 
 
     // // // Delegation - voting rights 
@@ -53,11 +54,12 @@ async function main() {
 
     // // query winning proposal 
     console.log(`Query Winning Proposal`);
-    const winningProposalVotes = await contractInstance.winningProposal();
+    const winningProposalIndex = await contractInstance.winningProposal();
+    const winningProposalObject = await contractInstance.proposals(winningProposalIndex);
     const winningProposalName = await contractInstance.winnerName();
 
     console.log(`name of Proposal: ${winningProposalName}`);
-    console.log(`No. of votes: ${winningProposalVotes}`);
+    console.log(`No. of votes: ${winningProposalObject.voteCount}`);
 
 };
 
