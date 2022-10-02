@@ -1,6 +1,8 @@
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
 import ABI from '../ABI.json';
+// import { abi } from "../artifacts/contracts/ballot.sol/Ballot.json";
+
 dotenv.config();
 
 async function main() {
