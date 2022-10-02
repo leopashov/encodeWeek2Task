@@ -1,6 +1,5 @@
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
-import { Ballot__factory } from "../typechain-types";
 import ABI from '../ABI.json';
 dotenv.config();
 
@@ -24,8 +23,11 @@ async function main() {
     console.log(await ballotContract.chairperson);
     // give voting rights to 0xEB92E3D17fCc40513D14BC3b7E6AA47d93b68765
     // await ballotContract.giveRightToVote("0xEB92E3D17fCc40513D14BC3b7E6AA47d93b68765");
-    const xmevanVote = await ballotContract.voters("0xEB92E3D17fCc40513D14BC3b7E6AA47d93b68765")
-    console.log(await xmevanVote.weight.value);
+    const TomVote = await ballotContract.voters("0xEB92E3D17fCc40513D14BC3b7E6AA47d93b68765")
+    console.log(await TomVote.weight);
+    // delegate my vote to thomas
+    const delegateTx = await ballotContract.delegate("0xEB92E3D17fCc40513D14BC3b7E6AA47d93b68765");
+    //console.log(await TomVote.weight);
 
 }
 
